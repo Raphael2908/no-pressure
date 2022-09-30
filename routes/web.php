@@ -39,9 +39,11 @@ Route::middleware([
     'verified',
 ])->group(function () {
     
-    Route::get('/pins', function () {
-        return Inertia::render('Pins');
-    })->name('pins');
+    // Route::get('/pins', function () {
+    //     return Inertia::render('Pins');
+    // })->name('pins');
+
+    Route::get('/pins', [PinController::class, 'index'])->name('pins');
 
     Route::post('/pins/create', [PinController::class, 'create'])->name('pin.create');
     Route::post('/pins/store', [PinController::class, 'store'])->name('pin.create');
