@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorepinRequest;
 use App\Http\Requests\UpdatepinRequest;
 use App\Models\Pin;
+use Inertia\Inertia;
+use App\Services\PinService;
+use Illuminate\Support\Facades\Auth;
 
 class PinController extends Controller
 {
@@ -15,7 +18,8 @@ class PinController extends Controller
      */
     public function index()
     {
-        //
+        $dataArr = Pin::all();
+        return Inertia::render('Pins', ["pins" => $dataArr]);
     }
 
     /**
@@ -36,7 +40,9 @@ class PinController extends Controller
      */
     public function store(StorepinRequest $request)
     {
-        //
+        Pin::create($request->validated());
+        
+        return redirect()->route("home");
     }
 
     /**
